@@ -19,6 +19,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.app.Fragment
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -27,6 +28,7 @@ import android.graphics.drawable.Drawable
 import android.support.annotation.*
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
@@ -310,6 +312,40 @@ fun View.bindColor(@ColorRes id: Int) = context.bindColor(id)
  * Binds the color
  */
 fun RecyclerView.ViewHolder.bindColor(@ColorRes id: Int) = itemView.context.bindColor(id)
+
+// COLOR STATE LIST
+
+/**
+ * Binds the color
+ */
+fun Context.bindColorStateList(id: Int): Lazy<ColorStateList> {
+    return lazy { ContextCompat.getColorStateList(this, id) }
+}
+
+/**
+ * Binds the color
+ */
+fun Dialog.bindColorStateList(id: Int) = context.bindColorStateList(id)
+
+/**
+ * Binds the color
+ */
+fun Fragment.bindColorStateList(id: Int) = activity.bindColorStateList(id)
+
+/**
+ * Binds the color
+ */
+fun android.support.v4.app.Fragment.bindColorStateList(id: Int) = activity.bindColorStateList(id)
+
+/**
+ * Binds the color
+ */
+fun View.bindColorStateList(id: Int) = context.bindColorStateList(id)
+
+/**
+ * Binds the color
+ */
+fun RecyclerView.ViewHolder.bindColorStateList(id: Int) = itemView.context.bindColorStateList(id)
 
 // DIMEN
 
