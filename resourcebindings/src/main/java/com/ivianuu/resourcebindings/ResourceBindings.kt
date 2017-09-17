@@ -387,7 +387,7 @@ fun RecyclerView.ViewHolder.bindDimen(@DimenRes id: Int) = itemView.context.bind
  * Binds the drawable
  */
 fun Context.bindDrawable(@DrawableRes id: Int): Lazy<Drawable> {
-    return lazy { ContextCompat.getDrawable(this, id) }
+    return lazy { AppCompatResources.getDrawable(this, id)!! }
 }
 
 /**
