@@ -47,7 +47,7 @@ import android.support.v4.app.Fragment as SupportFragment
  * Binds the anim
  */
 fun Context.bindAnim(@AnimRes id: Int): Lazy<Animation> {
-    return lazy { AnimationUtils.loadAnimation(this, id) }
+    return unsafeLazy { AnimationUtils.loadAnimation(this, id) }
 }
 
 /**
@@ -81,7 +81,7 @@ fun RecyclerView.ViewHolder.bindAnim(@AnimRes id: Int) = itemView.context.bindAn
  * Binds the int array
  */
 fun Context.bindIntArray(@ArrayRes id: Int): Lazy<IntArray> {
-    return lazy { resources.getIntArray(id) }
+    return unsafeLazy { resources.getIntArray(id) }
 }
 
 /**
@@ -115,7 +115,7 @@ fun RecyclerView.ViewHolder.bindIntArray(@ArrayRes id: Int) = itemView.context.b
  * Binds the string array
  */
 fun Context.bindStringArray(@ArrayRes id: Int): Lazy<Array<String>> {
-    return lazy { resources.getStringArray(id) }
+    return unsafeLazy { resources.getStringArray(id) }
 }
 
 /**
@@ -149,7 +149,7 @@ fun RecyclerView.ViewHolder.bindStringArray(@ArrayRes id: Int) = itemView.contex
  * Binds the text array
  */
 fun Context.bindTextArray(@ArrayRes id: Int): Lazy<Array<CharSequence>> {
-    return lazy { resources.getTextArray(id) }
+    return unsafeLazy { resources.getTextArray(id) }
 }
 
 /**
@@ -183,7 +183,7 @@ fun RecyclerView.ViewHolder.bindTextArray(@ArrayRes id: Int) = itemView.context.
  * Binds the typed array
  */
 fun Context.bindTypedArray(@ArrayRes id: Int): Lazy<TypedArray> {
-    return lazy { resources.obtainTypedArray(id) }
+    return unsafeLazy { resources.obtainTypedArray(id) }
 }
 
 /**
@@ -217,7 +217,7 @@ fun RecyclerView.ViewHolder.bindTypedArray(@ArrayRes id: Int) = itemView.context
  * Binds the bitmap
  */
 fun Context.bindBitmap(@DrawableRes id: Int): Lazy<Bitmap> {
-    return lazy { BitmapFactory.decodeResource(resources, id) }
+    return unsafeLazy { BitmapFactory.decodeResource(resources, id) }
 }
 
 /**
@@ -251,7 +251,7 @@ fun RecyclerView.ViewHolder.bindBitmap(@DrawableRes id: Int) = itemView.context.
  * Binds the boolean
  */
 fun Context.bindBool(@BoolRes id: Int): Lazy<Boolean> {
-    return lazy { resources.getBoolean(id) }
+    return unsafeLazy { resources.getBoolean(id) }
 }
 
 /**
@@ -285,7 +285,7 @@ fun RecyclerView.ViewHolder.bindBool(@BoolRes id: Int) = itemView.context.bindBo
  * Binds the color
  */
 fun Context.bindColor(@ColorRes id: Int): Lazy<Int> {
-    return lazy { ContextCompat.getColor(this, id) }
+    return unsafeLazy { ContextCompat.getColor(this, id) }
 }
 
 /**
@@ -319,7 +319,7 @@ fun RecyclerView.ViewHolder.bindColor(@ColorRes id: Int) = itemView.context.bind
  * Binds the color
  */
 fun Context.bindColorStateList(id: Int): Lazy<ColorStateList> {
-    return lazy { ContextCompat.getColorStateList(this, id) }
+    return unsafeLazy { ContextCompat.getColorStateList(this, id) }
 }
 
 /**
@@ -353,7 +353,7 @@ fun RecyclerView.ViewHolder.bindColorStateList(id: Int) = itemView.context.bindC
  * Binds the dimen
  */
 fun Context.bindDimen(@DimenRes id: Int): Lazy<Int> {
-    return lazy { resources.getDimensionPixelSize(id) }
+    return unsafeLazy { resources.getDimensionPixelSize(id) }
 }
 
 /**
@@ -387,7 +387,7 @@ fun RecyclerView.ViewHolder.bindDimen(@DimenRes id: Int) = itemView.context.bind
  * Binds the drawable
  */
 fun Context.bindDrawable(@DrawableRes id: Int): Lazy<Drawable> {
-    return lazy { AppCompatResources.getDrawable(this, id)!! }
+    return unsafeLazy { AppCompatResources.getDrawable(this, id)!! }
 }
 
 /**
@@ -421,10 +421,10 @@ fun RecyclerView.ViewHolder.bindDrawable(@DrawableRes id: Int) = itemView.contex
  * Binds the float
  */
 fun Context.bindFloat(@DimenRes id: Int): Lazy<Float> {
-    return lazy {
+    return unsafeLazy {
         val value = VALUE_HOLDER.VALUE
         resources.getValue(id, value, true)
-        return@lazy value.float
+        return@unsafeLazy value.float
     }
 }
 
@@ -459,7 +459,7 @@ fun RecyclerView.ViewHolder.bindFloat(@DimenRes id: Int) = itemView.context.bind
  * Binds the font
  */
 fun Context.bindFont(@FontRes id: Int): Lazy<Typeface> {
-    return lazy { ResourcesCompat.getFont(this, id)!! }
+    return unsafeLazy { ResourcesCompat.getFont(this, id)!! }
 }
 
 /**
@@ -493,7 +493,7 @@ fun RecyclerView.ViewHolder.bindFont(@FontRes id: Int) = itemView.context.bindFl
  * Binds the int
  */
 fun Context.bindInt(@IntegerRes id: Int): Lazy<Int> {
-    return lazy { resources.getInteger(id) }
+    return unsafeLazy { resources.getInteger(id) }
 }
 
 /**
@@ -527,7 +527,7 @@ fun RecyclerView.ViewHolder.bindInt(@IntegerRes id: Int) = itemView.context.bind
  * Binds the string
  */
 fun Context.bindString(@StringRes id: Int): Lazy<String> {
-    return lazy { getString(id) }
+    return unsafeLazy { getString(id) }
 }
 
 /**
@@ -561,43 +561,45 @@ fun RecyclerView.ViewHolder.bindString(@StringRes id: Int) = itemView.context.bi
  * Binds the view
  */
 fun <V : View>Activity.bindView(@IdRes id: Int): Lazy<V> {
-    return lazy { findViewById<V>(id) }
+    return unsafeLazy { findViewById<V>(id) }
 }
 
 /**
  * Binds the view
  */
 fun <V : View>Dialog.bindView(@IdRes id: Int): Lazy<V> {
-    return lazy { findViewById<V>(id) }
+    return unsafeLazy { findViewById<V>(id) }
 }
 
 /**
  * Binds the view
  */
 fun <V : View>Fragment.bindView(@IdRes id: Int): Lazy<V> {
-    return lazy { view.findViewById<V>(id) }
+    return unsafeLazy { view.findViewById<V>(id) }
 }
 
 /**
  * Binds the view
  */
 fun <V : View>android.support.v4.app.Fragment.bindView(@IdRes id: Int): Lazy<V> {
-    return lazy { view!!.findViewById<V>(id) }
+    return unsafeLazy { view!!.findViewById<V>(id) }
 }
 
 /**
  * Binds the view
  */
 fun <V : View>View.bindView(@IdRes id: Int): Lazy<V> {
-    return lazy { findViewById<V>(id) }
+    return unsafeLazy { findViewById<V>(id) }
 }
 
 /**
  * Binds the view
  */
 fun <V : View>RecyclerView.ViewHolder.bindView(@IdRes id: Int): Lazy<V> {
-    return kotlin.lazy { itemView.findViewById<V>(id) }
+    return unsafeLazy { itemView.findViewById<V>(id) }
 }
+
+private fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
 private object VALUE_HOLDER {
     val VALUE: TypedValue = TypedValue()
