@@ -46,9 +46,8 @@ import android.support.v4.app.Fragment as SupportFragment
 /**
  * Binds the anim
  */
-fun Context.bindAnim(@AnimRes id: Int): Lazy<Animation> {
-    return unsafeLazy { AnimationUtils.loadAnimation(this, id) }
-}
+fun Context.bindAnim(@AnimRes id: Int): Lazy<Animation> =
+        unsafeLazy { AnimationUtils.loadAnimation(this, id) }
 
 /**
  * Binds the anim
@@ -80,9 +79,8 @@ fun RecyclerView.ViewHolder.bindAnim(@AnimRes id: Int) = itemView.context.bindAn
 /**
  * Binds the int array
  */
-fun Context.bindIntArray(@ArrayRes id: Int): Lazy<IntArray> {
-    return unsafeLazy { resources.getIntArray(id) }
-}
+fun Context.bindIntArray(@ArrayRes id: Int): Lazy<IntArray> =
+        unsafeLazy { resources.getIntArray(id) }
 
 /**
  * Binds the int array
@@ -114,9 +112,8 @@ fun RecyclerView.ViewHolder.bindIntArray(@ArrayRes id: Int) = itemView.context.b
 /**
  * Binds the string array
  */
-fun Context.bindStringArray(@ArrayRes id: Int): Lazy<Array<String>> {
-    return unsafeLazy { resources.getStringArray(id) }
-}
+fun Context.bindStringArray(@ArrayRes id: Int): Lazy<Array<String>> =
+        unsafeLazy { resources.getStringArray(id) }
 
 /**
  * Binds the string array
@@ -148,9 +145,8 @@ fun RecyclerView.ViewHolder.bindStringArray(@ArrayRes id: Int) = itemView.contex
 /**
  * Binds the text array
  */
-fun Context.bindTextArray(@ArrayRes id: Int): Lazy<Array<CharSequence>> {
-    return unsafeLazy { resources.getTextArray(id) }
-}
+fun Context.bindTextArray(@ArrayRes id: Int): Lazy<Array<CharSequence>> =
+        unsafeLazy { resources.getTextArray(id) }
 
 /**
  * Binds the text array
@@ -182,9 +178,8 @@ fun RecyclerView.ViewHolder.bindTextArray(@ArrayRes id: Int) = itemView.context.
 /**
  * Binds the typed array
  */
-fun Context.bindTypedArray(@ArrayRes id: Int): Lazy<TypedArray> {
-    return unsafeLazy { resources.obtainTypedArray(id) }
-}
+fun Context.bindTypedArray(@ArrayRes id: Int): Lazy<TypedArray> =
+        unsafeLazy { resources.obtainTypedArray(id) }
 
 /**
  * Binds the typed array
@@ -216,9 +211,8 @@ fun RecyclerView.ViewHolder.bindTypedArray(@ArrayRes id: Int) = itemView.context
 /**
  * Binds the bitmap
  */
-fun Context.bindBitmap(@DrawableRes id: Int): Lazy<Bitmap> {
-    return unsafeLazy { BitmapFactory.decodeResource(resources, id) }
-}
+fun Context.bindBitmap(@DrawableRes id: Int): Lazy<Bitmap> =
+        unsafeLazy { BitmapFactory.decodeResource(resources, id) }
 
 /**
  * Binds the bitmap
@@ -250,9 +244,7 @@ fun RecyclerView.ViewHolder.bindBitmap(@DrawableRes id: Int) = itemView.context.
 /**
  * Binds the boolean
  */
-fun Context.bindBool(@BoolRes id: Int): Lazy<Boolean> {
-    return unsafeLazy { resources.getBoolean(id) }
-}
+fun Context.bindBool(@BoolRes id: Int): Lazy<Boolean> = unsafeLazy { resources.getBoolean(id) }
 
 /**
  * Binds the boolean
@@ -284,9 +276,8 @@ fun RecyclerView.ViewHolder.bindBool(@BoolRes id: Int) = itemView.context.bindBo
 /**
  * Binds the color
  */
-fun Context.bindColor(@ColorRes id: Int): Lazy<Int> {
-    return unsafeLazy { ContextCompat.getColor(this, id) }
-}
+fun Context.bindColor(@ColorRes id: Int): Lazy<Int> =
+        unsafeLazy { ContextCompat.getColor(this, id) }
 
 /**
  * Binds the color
@@ -318,9 +309,8 @@ fun RecyclerView.ViewHolder.bindColor(@ColorRes id: Int) = itemView.context.bind
 /**
  * Binds the color
  */
-fun Context.bindColorStateList(id: Int): Lazy<ColorStateList> {
-    return unsafeLazy { ContextCompat.getColorStateList(this, id) }
-}
+fun Context.bindColorStateList(id: Int): Lazy<ColorStateList> =
+        unsafeLazy { ContextCompat.getColorStateList(this, id) }
 
 /**
  * Binds the color
@@ -352,9 +342,8 @@ fun RecyclerView.ViewHolder.bindColorStateList(id: Int) = itemView.context.bindC
 /**
  * Binds the dimen
  */
-fun Context.bindDimen(@DimenRes id: Int): Lazy<Int> {
-    return unsafeLazy { resources.getDimensionPixelSize(id) }
-}
+fun Context.bindDimen(@DimenRes id: Int): Lazy<Int> =
+        unsafeLazy { resources.getDimensionPixelSize(id) }
 
 /**
  * Binds the dimen
@@ -386,9 +375,8 @@ fun RecyclerView.ViewHolder.bindDimen(@DimenRes id: Int) = itemView.context.bind
 /**
  * Binds the drawable
  */
-fun Context.bindDrawable(@DrawableRes id: Int): Lazy<Drawable> {
-    return unsafeLazy { AppCompatResources.getDrawable(this, id)!! }
-}
+fun Context.bindDrawable(@DrawableRes id: Int): Lazy<Drawable> =
+        unsafeLazy { AppCompatResources.getDrawable(this, id)!! }
 
 /**
  * Binds the drawable
@@ -458,9 +446,8 @@ fun RecyclerView.ViewHolder.bindFloat(@DimenRes id: Int) = itemView.context.bind
 /**
  * Binds the font
  */
-fun Context.bindFont(@FontRes id: Int): Lazy<Typeface> {
-    return unsafeLazy { ResourcesCompat.getFont(this, id)!! }
-}
+fun Context.bindFont(@FontRes id: Int): Lazy<Typeface> =
+        unsafeLazy { ResourcesCompat.getFont(this, id)!! }
 
 /**
  * Binds the font
@@ -492,9 +479,7 @@ fun RecyclerView.ViewHolder.bindFont(@FontRes id: Int) = itemView.context.bindFl
 /**
  * Binds the int
  */
-fun Context.bindInt(@IntegerRes id: Int): Lazy<Int> {
-    return unsafeLazy { resources.getInteger(id) }
-}
+fun Context.bindInt(@IntegerRes id: Int): Lazy<Int> = unsafeLazy { resources.getInteger(id) }
 
 /**
  * Binds the int
@@ -526,9 +511,7 @@ fun RecyclerView.ViewHolder.bindInt(@IntegerRes id: Int) = itemView.context.bind
 /**
  * Binds the string
  */
-fun Context.bindString(@StringRes id: Int): Lazy<String> {
-    return unsafeLazy { getString(id) }
-}
+fun Context.bindString(@StringRes id: Int): Lazy<String> = unsafeLazy { getString(id) }
 
 /**
  * Binds the string
@@ -560,44 +543,34 @@ fun RecyclerView.ViewHolder.bindString(@StringRes id: Int) = itemView.context.bi
 /**
  * Binds the view
  */
-fun <V : View>Activity.bindView(@IdRes id: Int): Lazy<V> {
-    return unsafeLazy { findViewById<V>(id) }
-}
+fun <V : View>Activity.bindView(@IdRes id: Int): Lazy<V> = unsafeLazy { findViewById<V>(id) }
 
 /**
  * Binds the view
  */
-fun <V : View>Dialog.bindView(@IdRes id: Int): Lazy<V> {
-    return unsafeLazy { findViewById<V>(id) }
-}
+fun <V : View>Dialog.bindView(@IdRes id: Int): Lazy<V> = unsafeLazy { findViewById<V>(id) }
 
 /**
  * Binds the view
  */
-fun <V : View>Fragment.bindView(@IdRes id: Int): Lazy<V> {
-    return unsafeLazy { view.findViewById<V>(id) }
-}
+fun <V : View>Fragment.bindView(@IdRes id: Int): Lazy<V> = unsafeLazy { view.findViewById<V>(id) }
 
 /**
  * Binds the view
  */
-fun <V : View>android.support.v4.app.Fragment.bindView(@IdRes id: Int): Lazy<V> {
-    return unsafeLazy { view!!.findViewById<V>(id) }
-}
+fun <V : View>android.support.v4.app.Fragment.bindView(@IdRes id: Int): Lazy<V> =
+        unsafeLazy { view!!.findViewById<V>(id) }
 
 /**
  * Binds the view
  */
-fun <V : View>View.bindView(@IdRes id: Int): Lazy<V> {
-    return unsafeLazy { findViewById<V>(id) }
-}
+fun <V : View>View.bindView(@IdRes id: Int): Lazy<V> = unsafeLazy { findViewById<V>(id) }
 
 /**
  * Binds the view
  */
-fun <V : View>RecyclerView.ViewHolder.bindView(@IdRes id: Int): Lazy<V> {
-    return unsafeLazy { itemView.findViewById<V>(id) }
-}
+fun <V : View>RecyclerView.ViewHolder.bindView(@IdRes id: Int): Lazy<V> =
+        unsafeLazy { itemView.findViewById<V>(id) }
 
 private fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
