@@ -121,8 +121,6 @@ fun android.support.v4.app.Fragment.bindDimen(@DimenRes id: Int) = activity!!.bi
 fun View.bindDimen(@DimenRes id: Int) = context.bindDimen(id)
 fun RecyclerView.ViewHolder.bindDimen(@DimenRes id: Int) = itemView.context.bindDimen(id)
 
-
-
 // DRAWABLE
 fun Context.bindDrawable(@DrawableRes id: Int) =
         unsafeLazy { AppCompatResources.getDrawable(this, id)!! }
@@ -180,7 +178,19 @@ fun <V : View>View.bindView(@IdRes id: Int) = unsafeLazy { findViewById<V>(id) }
 fun <V : View>RecyclerView.ViewHolder.bindView(@IdRes id: Int) =
         unsafeLazy { itemView.findViewById<V>(id) }
 
+// OPTIONAL VIEW
+fun <V : View>Activity.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { findViewById<V>(id) }
+fun <V : View>Dialog.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { findViewById<V>(id) }
+fun <V : View>Fragment.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { view.findViewById<V>(id) }
+fun <V : View>android.support.v4.app.Fragment.bindOptionalView(@IdRes id: Int) =
+        optionalUnsafeLazy { view!!.findViewById<V>(id) }
+fun <V : View>View.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { findViewById<V>(id) }
+fun <V : View>RecyclerView.ViewHolder.bindOptionalView(@IdRes id: Int) =
+        optionalUnsafeLazy { itemView.findViewById<V>(id) }
+
 private fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
+
+private fun <T> optionalUnsafeLazy(initializer: () -> T?) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
 private object VALUE_HOLDER {
     val VALUE: TypedValue = TypedValue()
