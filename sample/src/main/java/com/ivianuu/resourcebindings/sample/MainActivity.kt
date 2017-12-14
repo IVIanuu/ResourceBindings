@@ -1,7 +1,7 @@
 package com.ivianuu.resourcebindings.sample
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import com.ivianuu.resourcebindings.bindAnim
 import com.ivianuu.resourcebindings.bindColor

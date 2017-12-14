@@ -19,12 +19,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.app.Fragment
 import android.content.Context
-import android.content.res.ColorStateList
-import android.content.res.TypedArray
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Typeface
-import android.graphics.drawable.Drawable
 import android.support.annotation.*
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
@@ -32,147 +27,162 @@ import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.support.v4.app.DialogFragment as SupportDialogFragment
 import android.support.v4.app.Fragment as SupportFragment
 
 // ANIM
-fun Context.bindAnim(@AnimRes id: Int) = unsafeLazy { AnimationUtils.loadAnimation(this, id) }
-fun Dialog.bindAnim(@AnimRes id: Int) = context.bindAnim(id)
-fun Fragment.bindAnim(@AnimRes id: Int) = activity.bindAnim(id)
-fun android.support.v4.app.Fragment.bindAnim(@AnimRes id: Int) = activity!!.bindAnim(id)
-fun View.bindAnim(@AnimRes id: Int) = context.bindAnim(id)
-fun RecyclerView.ViewHolder.bindAnim(@AnimRes id: Int) = itemView.context.bindAnim(id)
+
+private fun Context.getResAnimation(@AnimRes id: Int) = AnimationUtils.loadAnimation(this, id)
+fun Context.bindAnim(@AnimRes id: Int) = unsafeLazy { getResAnimation(id) }
+fun Dialog.bindAnim(@AnimRes id: Int) = unsafeLazy { context.getResAnimation(id) }
+fun Fragment.bindAnim(@AnimRes id: Int) = unsafeLazy { activity.getResAnimation(id) }
+fun SupportFragment.bindAnim(@AnimRes id: Int) = unsafeLazy { activity!!.getResAnimation(id) }
+fun View.bindAnim(@AnimRes id: Int) = unsafeLazy { context.getResAnimation(id) }
+fun RecyclerView.ViewHolder.bindAnim(@AnimRes id: Int) = unsafeLazy { itemView.context.getResAnimation(id) }
 
 // INT ARRAY
-fun Context.bindIntArray(@ArrayRes id: Int) = unsafeLazy { resources.getIntArray(id) }
-fun Dialog.bindIntArray(@ArrayRes id: Int) = context.bindIntArray(id)
-fun Fragment.bindIntArray(@ArrayRes id: Int) = activity.bindIntArray(id)
-fun android.support.v4.app.Fragment.bindIntArray(@ArrayRes id: Int) = activity!!.bindIntArray(id)
-fun View.bindIntArray(@ArrayRes id: Int) = context.bindIntArray(id)
-fun RecyclerView.ViewHolder.bindIntArray(@ArrayRes id: Int) = itemView.context.bindIntArray(id)
+private fun Context.getResIntArray(@ArrayRes id: Int) = resources.getIntArray(id)
+fun Context.bindIntArray(@ArrayRes id: Int) = unsafeLazy { getResIntArray(id) }
+fun Dialog.bindIntArray(@ArrayRes id: Int) = unsafeLazy { context.getResIntArray(id) }
+fun Fragment.bindIntArray(@ArrayRes id: Int) = unsafeLazy { activity.getResIntArray(id) }
+fun SupportFragment.bindIntArray(@ArrayRes id: Int) = unsafeLazy { context!!.getResIntArray(id) }
+fun View.bindIntArray(@ArrayRes id: Int) = unsafeLazy { context.getResIntArray(id) }
+fun RecyclerView.ViewHolder.bindIntArray(@ArrayRes id: Int) = unsafeLazy { itemView.context.getResIntArray(id) }
 
 // STRING ARRAY
-fun Context.bindStringArray(@ArrayRes id: Int) = unsafeLazy { resources.getStringArray(id) }
-fun Dialog.bindStringArray(@ArrayRes id: Int) = context.bindStringArray(id)
-fun Fragment.bindStringArray(@ArrayRes id: Int) = activity.bindStringArray(id)
-fun android.support.v4.app.Fragment.bindStringArray(@ArrayRes id: Int) = activity!!.bindStringArray(id)
-fun View.bindStringArray(@ArrayRes id: Int) = context.bindStringArray(id)
-fun RecyclerView.ViewHolder.bindStringArray(@ArrayRes id: Int) = itemView.context.bindStringArray(id)
+private fun Context.getResStringArray(@ArrayRes id: Int) = resources.getStringArray(id)
+fun Context.bindStringArray(@ArrayRes id: Int) = unsafeLazy { getResStringArray(id) }
+fun Dialog.bindStringArray(@ArrayRes id: Int) = unsafeLazy { context.getResStringArray(id) }
+fun Fragment.bindStringArray(@ArrayRes id: Int) = unsafeLazy { activity.getResStringArray(id) }
+fun SupportFragment.bindStringArray(@ArrayRes id: Int) = unsafeLazy { activity!!.getResStringArray(id) }
+fun View.bindStringArray(@ArrayRes id: Int) = unsafeLazy { context.getResStringArray(id) }
+fun RecyclerView.ViewHolder.bindStringArray(@ArrayRes id: Int) = unsafeLazy { itemView.context.getResStringArray(id) }
 
 // TEXT ARRAY
-fun Context.bindTextArray(@ArrayRes id: Int) = unsafeLazy { resources.getTextArray(id) }
-fun Dialog.bindTextArray(@ArrayRes id: Int) = context.bindTextArray(id)
-fun Fragment.bindTextArray(@ArrayRes id: Int) = activity.bindTextArray(id)
-fun android.support.v4.app.Fragment.bindTextArray(@ArrayRes id: Int) = activity!!.bindTextArray(id)
-fun View.bindTextArray(@ArrayRes id: Int) = context.bindTextArray(id)
-fun RecyclerView.ViewHolder.bindTextArray(@ArrayRes id: Int) = itemView.context.bindTextArray(id)
+private fun Context.getResTextArray(@ArrayRes id: Int) = resources.getTextArray(id)
+fun Context.bindTextArray(@ArrayRes id: Int) = unsafeLazy { getResTextArray(id) }
+fun Dialog.bindTextArray(@ArrayRes id: Int) = unsafeLazy { context.getResTextArray(id) }
+fun Fragment.bindTextArray(@ArrayRes id: Int) = unsafeLazy { activity.getResTextArray(id) }
+fun SupportFragment.bindTextArray(@ArrayRes id: Int) = unsafeLazy { activity!!.getResTextArray(id) }
+fun View.bindTextArray(@ArrayRes id: Int) = unsafeLazy { context.getResTextArray(id) }
+fun RecyclerView.ViewHolder.bindTextArray(@ArrayRes id: Int) = unsafeLazy { itemView.context.getResTextArray(id) }
 
 // TYPED ARRAY
-fun Context.bindTypedArray(@ArrayRes id: Int): Lazy<TypedArray> =
-        unsafeLazy { resources.obtainTypedArray(id) }
-fun Dialog.bindTypedArray(@ArrayRes id: Int) = context.bindTypedArray(id)
-fun Fragment.bindTypedArray(@ArrayRes id: Int) = activity.bindTypedArray(id)
-fun android.support.v4.app.Fragment.bindTypedArray(@ArrayRes id: Int) = activity!!.bindTypedArray(id)
-fun View.bindTypedArray(@ArrayRes id: Int) = context.bindTypedArray(id)
-fun RecyclerView.ViewHolder.bindTypedArray(@ArrayRes id: Int) = itemView.context.bindTypedArray(id)
+private fun Context.getResTypedArray(@ArrayRes id: Int) = resources.obtainTypedArray(id)
+fun Context.bindTypedArray(@ArrayRes id: Int) = unsafeLazy { getResTypedArray(id) }
+fun Dialog.bindTypedArray(@ArrayRes id: Int) = unsafeLazy { context.getResTypedArray(id) }
+fun Fragment.bindTypedArray(@ArrayRes id: Int) = unsafeLazy { activity.getResTypedArray(id) }
+fun SupportFragment.bindTypedArray(@ArrayRes id: Int) = unsafeLazy { activity!!.getResTypedArray(id) }
+fun View.bindTypedArray(@ArrayRes id: Int) = unsafeLazy { context.getResTypedArray(id) }
+fun RecyclerView.ViewHolder.bindTypedArray(@ArrayRes id: Int) = unsafeLazy { itemView.context.getResTypedArray(id) }
 
 // BITMAP
-fun Context.bindBitmap(@DrawableRes id: Int): Lazy<Bitmap> =
-        unsafeLazy { BitmapFactory.decodeResource(resources, id) }
+private fun Context.getResBitmap(@DrawableRes id: Int) = BitmapFactory.decodeResource(resources, id)
+fun Context.bindBitmap(@DrawableRes id: Int) = unsafeLazy { getResBitmap(id) }
 fun Dialog.bindBitmap(@DrawableRes id: Int) = context.bindBitmap(id)
 fun Fragment.bindBitmap(@DrawableRes id: Int) = activity.bindBitmap(id)
-fun android.support.v4.app.Fragment.bindBitmap(@DrawableRes id: Int) = activity!!.bindBitmap(id)
+fun SupportFragment.bindBitmap(@DrawableRes id: Int) = activity!!.bindBitmap(id)
 fun View.bindBitmap(@DrawableRes id: Int) = context.bindBitmap(id)
 fun RecyclerView.ViewHolder.bindBitmap(@DrawableRes id: Int) = itemView.context.bindBitmap(id)
 
 // BOOL
-fun Context.bindBool(@BoolRes id: Int): Lazy<Boolean> = unsafeLazy { resources.getBoolean(id) }
-fun Dialog.bindBool(@BoolRes id: Int) = context.bindBool(id)
-fun Fragment.bindBool(@BoolRes id: Int) = activity.bindBool(id)
-fun android.support.v4.app.Fragment.bindBool(@BoolRes id: Int) = activity!!.bindBool(id)
-fun View.bindBool(@BoolRes id: Int) = context.bindBool(id)
-fun RecyclerView.ViewHolder.bindBool(@BoolRes id: Int) = itemView.context.bindBool(id)
+private fun Context.getResBool(@BoolRes id: Int) = resources.getBoolean(id)
+fun Context.bindBool(@BoolRes id: Int) = unsafeLazy { getResBool(id) }
+fun Dialog.bindBool(@BoolRes id: Int) = unsafeLazy { context.getResBool(id) }
+fun Fragment.bindBool(@BoolRes id: Int) = unsafeLazy { activity.getResBool(id) }
+fun SupportFragment.bindBool(@BoolRes id: Int) = unsafeLazy { activity!!.getResBool(id) }
+fun View.bindBool(@BoolRes id: Int) = unsafeLazy { context.getResBool(id) }
+fun RecyclerView.ViewHolder.bindBool(@BoolRes id: Int) = unsafeLazy { itemView.context.getResBool(id) }
 
 // COLOR
-fun Context.bindColor(@ColorRes id: Int): Lazy<Int> =
-        unsafeLazy { ContextCompat.getColor(this, id) }
-fun Dialog.bindColor(@ColorRes id: Int) = context.bindColor(id)
-fun Fragment.bindColor(@ColorRes id: Int) = activity.bindColor(id)
-fun android.support.v4.app.Fragment.bindColor(@ColorRes id: Int) = activity!!.bindColor(id)
-fun View.bindColor(@ColorRes id: Int) = context.bindColor(id)
-fun RecyclerView.ViewHolder.bindColor(@ColorRes id: Int) = itemView.context.bindColor(id)
+private fun Context.getResColor(@ColorRes id: Int) = ContextCompat.getColor(this, id)
+fun Context.bindColor(@ColorRes id: Int) = unsafeLazy { getResColor(id) }
+fun Dialog.bindColor(@ColorRes id: Int) = unsafeLazy { context.getResColor(id) }
+fun Fragment.bindColor(@ColorRes id: Int) = unsafeLazy { activity.getResColor(id) }
+fun SupportFragment.bindColor(@ColorRes id: Int) = unsafeLazy { activity!!.getResColor(id) }
+fun View.bindColor(@ColorRes id: Int) = unsafeLazy { context.getResColor(id) }
+fun RecyclerView.ViewHolder.bindColor(@ColorRes id: Int) = unsafeLazy { itemView.context.getResColor(id) }
 
 // COLOR STATE LIST
-fun Context.bindColorStateList(id: Int) = unsafeLazy { ContextCompat.getColorStateList(this, id) }
-fun Dialog.bindColorStateList(id: Int) = context.bindColorStateList(id)
-fun Fragment.bindColorStateList(id: Int) = activity.bindColorStateList(id)
-fun android.support.v4.app.Fragment.bindColorStateList(id: Int) = activity!!.bindColorStateList(id)
-fun View.bindColorStateList(id: Int) = context.bindColorStateList(id)
-fun RecyclerView.ViewHolder.bindColorStateList(id: Int) = itemView.context.bindColorStateList(id)
+private fun Context.getResColorStateList(id: Int) = ContextCompat.getColorStateList(this, id)
+fun Context.bindColorStateList(id: Int) = unsafeLazy { getResColorStateList(id) }
+fun Dialog.bindColorStateList(id: Int) = unsafeLazy { context.getResColorStateList(id) }
+fun Fragment.bindColorStateList(id: Int) = unsafeLazy { activity.getResColorStateList(id) }
+fun SupportFragment.bindColorStateList(id: Int) = unsafeLazy { activity!!.getResColorStateList(id) }
+fun View.bindColorStateList(id: Int) = unsafeLazy { context.getResColorStateList(id) }
+fun RecyclerView.ViewHolder.bindColorStateList(id: Int) = unsafeLazy { itemView.context.getResColorStateList(id) }
 
 // DIMEN
-fun Context.bindDimen(@DimenRes id: Int) =
-        unsafeLazy { resources.getDimensionPixelSize(id) }
-fun Dialog.bindDimen(@DimenRes id: Int) = context.bindDimen(id)
-fun Fragment.bindDimen(@DimenRes id: Int) = activity.bindDimen(id)
-fun android.support.v4.app.Fragment.bindDimen(@DimenRes id: Int) = activity!!.bindDimen(id)
-fun View.bindDimen(@DimenRes id: Int) = context.bindDimen(id)
-fun RecyclerView.ViewHolder.bindDimen(@DimenRes id: Int) = itemView.context.bindDimen(id)
+private fun Context.getResDimen(@DimenRes id: Int) = resources.getDimensionPixelSize(id)
+fun Context.bindDimen(@DimenRes id: Int) = unsafeLazy { getResDimen(id) }
+fun Dialog.bindDimen(@DimenRes id: Int) = unsafeLazy { context.getResDimen(id) }
+fun Fragment.bindDimen(@DimenRes id: Int) = unsafeLazy { activity.getResDimen(id) }
+fun SupportFragment.bindDimen(@DimenRes id: Int) = unsafeLazy { activity!!.getResDimen(id) }
+fun View.bindDimen(@DimenRes id: Int) = unsafeLazy { context.getResDimen(id) }
+fun RecyclerView.ViewHolder.bindDimen(@DimenRes id: Int) = unsafeLazy { itemView.context.getResDimen(id) }
+
+// DIMEN PX
+private fun Context.getResDimenPx(@DimenRes id: Int) = resources.getDimension(id)
+fun Context.bindDimenPx(@DimenRes id: Int) = unsafeLazy { getResDimenPx(id) }
+fun Dialog.bindDimenPx(@DimenRes id: Int) = unsafeLazy { context.getResDimenPx(id) }
+fun Fragment.bindDimenPx(@DimenRes id: Int) = unsafeLazy { activity.getResDimenPx(id) }
+fun SupportFragment.bindDimenPx(@DimenRes id: Int) = unsafeLazy { activity!!.getResDimenPx(id) }
+fun View.bindDimenPx(@DimenRes id: Int) = unsafeLazy { context.getResDimenPx(id) }
+fun RecyclerView.ViewHolder.bindDimenPx(@DimenRes id: Int) = unsafeLazy { itemView.context.getResDimenPx(id) }
 
 // DRAWABLE
-fun Context.bindDrawable(@DrawableRes id: Int) =
-        unsafeLazy { AppCompatResources.getDrawable(this, id)!! }
-fun Dialog.bindDrawable(@DrawableRes id: Int) = context.bindDrawable(id)
-fun Fragment.bindDrawable(@DrawableRes id: Int) = activity.bindDrawable(id)
-fun android.support.v4.app.Fragment.bindDrawable(@DrawableRes id: Int) = activity!!.bindDrawable(id)
-fun View.bindDrawable(@DrawableRes id: Int) = context.bindDrawable(id)
-fun RecyclerView.ViewHolder.bindDrawable(@DrawableRes id: Int) = itemView.context.bindDrawable(id)
+private fun Context.getResDrawable(@DrawableRes id: Int) = AppCompatResources.getDrawable(this, id)!!
+fun Context.bindDrawable(@DrawableRes id: Int) = unsafeLazy { getResDrawable(id) }
+fun Dialog.bindDrawable(@DrawableRes id: Int) = unsafeLazy { context.getResDrawable(id) }
+fun Fragment.bindDrawable(@DrawableRes id: Int) = unsafeLazy { activity.getResDrawable(id) }
+fun SupportFragment.bindDrawable(@DrawableRes id: Int) = unsafeLazy { activity!!.getResDrawable(id) }
+fun View.bindDrawable(@DrawableRes id: Int) = unsafeLazy { context.getResDrawable(id) }
+fun RecyclerView.ViewHolder.bindDrawable(@DrawableRes id: Int) = unsafeLazy { itemView.context.getResDrawable(id) }
 
 // FLOAT
-fun Context.bindFloat(@DimenRes id: Int): Lazy<Float> {
-    return unsafeLazy {
-        val value = VALUE_HOLDER.VALUE
-        resources.getValue(id, value, true)
-        return@unsafeLazy value.float
-    }
+private fun Context.getResFloat(@DimenRes id: Int): Float {
+    val value = VALUE_HOLDER.VALUE
+    resources.getValue(id, value, true)
+    return value.float
 }
-fun Dialog.bindFloat(@DimenRes id: Int) = context.bindFloat(id)
-fun Fragment.bindFloat(@DimenRes id: Int) = activity.bindFloat(id)
-fun android.support.v4.app.Fragment.bindFloat(@DimenRes id: Int) = activity!!.bindFloat(id)
-fun View.bindFloat(@DimenRes id: Int) = context.bindFloat(id)
-fun RecyclerView.ViewHolder.bindFloat(@DimenRes id: Int) = itemView.context.bindFloat(id)
+fun Context.bindFloat(@DimenRes id: Int) = unsafeLazy { getResFloat(id) }
+fun Dialog.bindFloat(@DimenRes id: Int) = unsafeLazy { context.getResFloat(id) }
+fun Fragment.bindFloat(@DimenRes id: Int) = unsafeLazy { activity.getResFloat(id) }
+fun SupportFragment.bindFloat(@DimenRes id: Int) = unsafeLazy { activity!!.getResFloat(id) }
+fun View.bindFloat(@DimenRes id: Int) = unsafeLazy { context.getResFloat(id) }
+fun RecyclerView.ViewHolder.bindFloat(@DimenRes id: Int) = unsafeLazy { itemView.context.getResFloat(id) }
 
 // FONT
-fun Context.bindFont(@FontRes id: Int) = unsafeLazy { ResourcesCompat.getFont(this, id)!! }
-fun Dialog.bindFont(@FontRes id: Int) = context.bindFloat(id)
-fun Fragment.bindFont(@FontRes id: Int) = activity.bindFloat(id)
-fun android.support.v4.app.Fragment.bindFont(@FontRes id: Int) = activity!!.bindFloat(id)
-fun View.bindFont(@FontRes id: Int) = context.bindFloat(id)
-fun RecyclerView.ViewHolder.bindFont(@FontRes id: Int) = itemView.context.bindFloat(id)
+private fun Context.getResFont(@FontRes id: Int) = ResourcesCompat.getFont(this, id)!!
+fun Context.bindFont(@FontRes id: Int) = unsafeLazy { getResFont(id) }
+fun Dialog.bindFont(@FontRes id: Int) = unsafeLazy { context.getResFont(id) }
+fun Fragment.bindFont(@FontRes id: Int) = unsafeLazy { activity.getResFont(id) }
+fun SupportFragment.bindFont(@FontRes id: Int) = unsafeLazy { activity!!.getResFont(id) }
+fun View.bindFont(@FontRes id: Int) = unsafeLazy { context.getResFont(id) }
+fun RecyclerView.ViewHolder.bindFont(@FontRes id: Int) = unsafeLazy { itemView.context.getResFont(id) }
 
 // INT
-fun Context.bindInt(@IntegerRes id: Int) = unsafeLazy { resources.getInteger(id) }
-fun Dialog.bindInt(@IntegerRes id: Int) = context.bindInt(id)
-fun Fragment.bindInt(@IntegerRes id: Int) = activity.bindInt(id)
-fun android.support.v4.app.Fragment.bindInt(@IntegerRes id: Int) = activity!!.bindInt(id)
-fun View.bindInt(@IntegerRes id: Int) = context.bindInt(id)
-fun RecyclerView.ViewHolder.bindInt(@IntegerRes id: Int) = itemView.context.bindInt(id)
+private fun Context.getResInt(@IntegerRes id: Int) = resources.getInteger(id)
+fun Context.bindInt(@IntegerRes id: Int) = unsafeLazy { getResInt(id) }
+fun Dialog.bindInt(@IntegerRes id: Int) = unsafeLazy { context.getResInt(id) }
+fun Fragment.bindInt(@IntegerRes id: Int) = unsafeLazy { activity.getResInt(id) }
+fun SupportFragment.bindInt(@IntegerRes id: Int) = unsafeLazy { activity!!.getResInt(id) }
+fun View.bindInt(@IntegerRes id: Int) = unsafeLazy { context.getResInt(id) }
+fun RecyclerView.ViewHolder.bindInt(@IntegerRes id: Int) = unsafeLazy { itemView.context.getResInt(id) }
 
 // STRING
 fun Context.bindString(@StringRes id: Int) = unsafeLazy { getString(id) }
-fun Dialog.bindString(@StringRes id: Int) = context.bindString(id)
-fun Fragment.bindString(@StringRes id: Int) = activity.bindString(id)
-fun android.support.v4.app.Fragment.bindString(@StringRes id: Int) = activity!!.bindString(id)
-fun View.bindString(@StringRes id: Int) = context.bindString(id)
-fun RecyclerView.ViewHolder.bindString(@StringRes id: Int) = itemView.context.bindString(id)
+fun Dialog.bindString(@StringRes id: Int) = unsafeLazy { context.getString(id) }
+fun Fragment.bindString(@StringRes id: Int) = unsafeLazy { activity.getString(id) }
+fun SupportFragment.bindString(@StringRes id: Int) = unsafeLazy { activity!!.getString(id) }
+fun View.bindString(@StringRes id: Int) = unsafeLazy { context.getString(id) }
+fun RecyclerView.ViewHolder.bindString(@StringRes id: Int) = unsafeLazy { itemView.context.getString(id) }
 
 // VIEW
 fun <V : View>Activity.bindView(@IdRes id: Int) = unsafeLazy { findViewById<V>(id) }
 fun <V : View>Dialog.bindView(@IdRes id: Int) = unsafeLazy { findViewById<V>(id) }
 fun <V : View>Fragment.bindView(@IdRes id: Int) = unsafeLazy { view.findViewById<V>(id) }
-fun <V : View>android.support.v4.app.Fragment.bindView(@IdRes id: Int) =
+fun <V : View>SupportFragment.bindView(@IdRes id: Int) =
         unsafeLazy { view!!.findViewById<V>(id) }
 fun <V : View>View.bindView(@IdRes id: Int) = unsafeLazy { findViewById<V>(id) }
 fun <V : View>RecyclerView.ViewHolder.bindView(@IdRes id: Int) =
@@ -182,11 +192,9 @@ fun <V : View>RecyclerView.ViewHolder.bindView(@IdRes id: Int) =
 fun <V : View>Activity.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { findViewById<V>(id) }
 fun <V : View>Dialog.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { findViewById<V>(id) }
 fun <V : View>Fragment.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { view.findViewById<V>(id) }
-fun <V : View>android.support.v4.app.Fragment.bindOptionalView(@IdRes id: Int) =
-        optionalUnsafeLazy { view!!.findViewById<V>(id) }
+fun <V : View>SupportFragment.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { view!!.findViewById<V>(id) }
 fun <V : View>View.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { findViewById<V>(id) }
-fun <V : View>RecyclerView.ViewHolder.bindOptionalView(@IdRes id: Int) =
-        optionalUnsafeLazy { itemView.findViewById<V>(id) }
+fun <V : View>RecyclerView.ViewHolder.bindOptionalView(@IdRes id: Int) = optionalUnsafeLazy { itemView.findViewById<V>(id) }
 
 private fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
