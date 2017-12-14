@@ -19,7 +19,11 @@ import android.app.Activity
 import android.app.Dialog
 import android.app.Fragment
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.BitmapFactory
+import android.graphics.Typeface
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.support.annotation.*
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
@@ -67,6 +71,20 @@ fun SupportFragment.bindTextArray(@ArrayRes id: Int) = unsafeLazy { activity!!.g
 fun View.bindTextArray(@ArrayRes id: Int) = unsafeLazy { context.getResTextArray(id) }
 fun RecyclerView.ViewHolder.bindTextArray(@ArrayRes id: Int) = unsafeLazy { itemView.context.getResTextArray(id) }
 
+// TEXT ARRAY ATTR
+private fun Context.resolveTextArrayAttr(@AttrRes attr: Int): Array<CharSequence> {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getTextArray(0)
+    array.recycle()
+    return value
+}
+fun Context.bindTextArrayAttr(@AttrRes attr: Int) = unsafeLazy { resolveTextArrayAttr(attr) }
+fun Dialog.bindTextArrayAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveTextArrayAttr(attr) }
+fun Fragment.bindTextArrayAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveTextArrayAttr(attr) }
+fun SupportFragment.bindTextArrayAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveTextArrayAttr(attr) }
+fun View.bindTextArrayAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveTextArrayAttr(attr) }
+fun RecyclerView.ViewHolder.bindTextArrayAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveTextArrayAttr(attr) }
+
 // TYPED ARRAY
 private fun Context.getResTypedArray(@ArrayRes id: Int) = resources.obtainTypedArray(id)
 fun Context.bindTypedArray(@ArrayRes id: Int) = unsafeLazy { getResTypedArray(id) }
@@ -94,6 +112,20 @@ fun SupportFragment.bindBool(@BoolRes id: Int) = unsafeLazy { activity!!.getResB
 fun View.bindBool(@BoolRes id: Int) = unsafeLazy { context.getResBool(id) }
 fun RecyclerView.ViewHolder.bindBool(@BoolRes id: Int) = unsafeLazy { itemView.context.getResBool(id) }
 
+// BOOL ATTR
+private fun Context.resolveBoolAttr(@AttrRes attr: Int): Boolean {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getBoolean(0, false)
+    array.recycle()
+    return value
+}
+fun Context.bindBoolAttr(@AttrRes attr: Int) = unsafeLazy { resolveBoolAttr(attr) }
+fun Dialog.bindBoolAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveBoolAttr(attr) }
+fun Fragment.bindBoolAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveBoolAttr(attr) }
+fun SupportFragment.bindBoolAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveBoolAttr(attr) }
+fun View.bindBoolAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveBoolAttr(attr) }
+fun RecyclerView.ViewHolder.bindBoolAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveBoolAttr(attr) }
+
 // COLOR
 private fun Context.getResColor(@ColorRes id: Int) = ContextCompat.getColor(this, id)
 fun Context.bindColor(@ColorRes id: Int) = unsafeLazy { getResColor(id) }
@@ -102,6 +134,20 @@ fun Fragment.bindColor(@ColorRes id: Int) = unsafeLazy { activity.getResColor(id
 fun SupportFragment.bindColor(@ColorRes id: Int) = unsafeLazy { activity!!.getResColor(id) }
 fun View.bindColor(@ColorRes id: Int) = unsafeLazy { context.getResColor(id) }
 fun RecyclerView.ViewHolder.bindColor(@ColorRes id: Int) = unsafeLazy { itemView.context.getResColor(id) }
+
+// COLOR ATTR
+private fun Context.resolveColorAttr(@AttrRes attr: Int): Int {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getColor(0, 0)
+    array.recycle()
+    return value
+}
+fun Context.bindColorAttr(@AttrRes attr: Int) = unsafeLazy { resolveColorAttr(attr) }
+fun Dialog.bindColorAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveColorAttr(attr) }
+fun Fragment.bindColorAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveColorAttr(attr) }
+fun SupportFragment.bindColorAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveColorAttr(attr) }
+fun View.bindColorAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveColorAttr(attr) }
+fun RecyclerView.ViewHolder.bindColorAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveColorAttr(attr) }
 
 // COLOR STATE LIST
 private fun Context.getResColorStateList(id: Int) = ContextCompat.getColorStateList(this, id)
@@ -112,6 +158,20 @@ fun SupportFragment.bindColorStateList(id: Int) = unsafeLazy { activity!!.getRes
 fun View.bindColorStateList(id: Int) = unsafeLazy { context.getResColorStateList(id) }
 fun RecyclerView.ViewHolder.bindColorStateList(id: Int) = unsafeLazy { itemView.context.getResColorStateList(id) }
 
+// COLOR STATE LIST ATTR
+private fun Context.resolveColorStateListAttr(@AttrRes attr: Int): ColorStateList {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getColorStateList(0)
+    array.recycle()
+    return value
+}
+fun Context.bindColorStateListAttr(@AttrRes attr: Int) = unsafeLazy { resolveColorStateListAttr(attr) }
+fun Dialog.bindColorStateListAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveColorStateListAttr(attr) }
+fun Fragment.bindColorStateListAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveColorStateListAttr(attr) }
+fun SupportFragment.bindColorStateListAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveColorStateListAttr(attr) }
+fun View.bindColorStateListAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveColorStateListAttr(attr) }
+fun RecyclerView.ViewHolder.bindColorStateListAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveColorStateListAttr(attr) }
+
 // DIMEN
 private fun Context.getResDimen(@DimenRes id: Int) = resources.getDimensionPixelSize(id)
 fun Context.bindDimen(@DimenRes id: Int) = unsafeLazy { getResDimen(id) }
@@ -120,6 +180,20 @@ fun Fragment.bindDimen(@DimenRes id: Int) = unsafeLazy { activity.getResDimen(id
 fun SupportFragment.bindDimen(@DimenRes id: Int) = unsafeLazy { activity!!.getResDimen(id) }
 fun View.bindDimen(@DimenRes id: Int) = unsafeLazy { context.getResDimen(id) }
 fun RecyclerView.ViewHolder.bindDimen(@DimenRes id: Int) = unsafeLazy { itemView.context.getResDimen(id) }
+
+// DIMEN ATTR
+private fun Context.resolveDimenAttr(@AttrRes attr: Int): Float {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getDimension(0, 0f)
+    array.recycle()
+    return value
+}
+fun Context.bindDimenAttr(@AttrRes attr: Int) = unsafeLazy { resolveDimenAttr(attr) }
+fun Dialog.bindDimenAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveDimenAttr(attr) }
+fun Fragment.bindDimenAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveDimenAttr(attr) }
+fun SupportFragment.bindDimenAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveDimenAttr(attr) }
+fun View.bindDimenAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveDimenAttr(attr) }
+fun RecyclerView.ViewHolder.bindDimenAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveDimenAttr(attr) }
 
 // DIMEN PX
 private fun Context.getResDimenPx(@DimenRes id: Int) = resources.getDimension(id)
@@ -130,6 +204,43 @@ fun SupportFragment.bindDimenPx(@DimenRes id: Int) = unsafeLazy { activity!!.get
 fun View.bindDimenPx(@DimenRes id: Int) = unsafeLazy { context.getResDimenPx(id) }
 fun RecyclerView.ViewHolder.bindDimenPx(@DimenRes id: Int) = unsafeLazy { itemView.context.getResDimenPx(id) }
 
+// DIMEN PX ATTR
+private fun Context.resolveDimenPxAttr(@AttrRes attr: Int): Int {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getDimensionPixelSize(0, 0)
+    array.recycle()
+    return value
+}
+fun Context.bindDimenPxAttr(@AttrRes attr: Int) = unsafeLazy { resolveDimenPxAttr(attr) }
+fun Dialog.bindDimenPxAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveDimenPxAttr(attr) }
+fun Fragment.bindDimenPxAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveDimenPxAttr(attr) }
+fun SupportFragment.bindDimenPxAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveDimenPxAttr(attr) }
+fun View.bindDimenPxAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveDimenPxAttr(attr) }
+fun RecyclerView.ViewHolder.bindDimenPxAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveDimenPxAttr(attr) }
+
+// DIMEN PX OFFSET
+private fun Context.getResDimenPxOffset(@DimenRes id: Int) = resources.getDimensionPixelOffset(id)
+fun Context.bindDimenPxOffset(@DimenRes id: Int) = unsafeLazy { getResDimenPxOffset(id) }
+fun Dialog.bindDimenPxOffset(@DimenRes id: Int) = unsafeLazy { context.getResDimenPxOffset(id) }
+fun Fragment.bindDimenPxOffset(@DimenRes id: Int) = unsafeLazy { activity.getResDimenPxOffset(id) }
+fun SupportFragment.bindDimenPxOffset(@DimenRes id: Int) = unsafeLazy { activity!!.getResDimenPxOffset(id) }
+fun View.bindDimenPxOffset(@DimenRes id: Int) = unsafeLazy { context.getResDimenPxOffset(id) }
+fun RecyclerView.ViewHolder.bindDimenPxOffset(@DimenRes id: Int) = unsafeLazy { itemView.context.getResDimenPxOffset(id) }
+
+// DIMEN PX ATTR OFFSET
+private fun Context.resolveDimenPxOffsetAttr(@AttrRes attr: Int): Int {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getDimensionPixelOffset(0, 0)
+    array.recycle()
+    return value
+}
+fun Context.bindDimenPxOffsetAttr(@AttrRes attr: Int) = unsafeLazy { resolveDimenPxOffsetAttr(attr) }
+fun Dialog.bindDimenPxOffsetAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveDimenPxOffsetAttr(attr) }
+fun Fragment.bindDimenPxOffsetAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveDimenPxOffsetAttr(attr) }
+fun SupportFragment.bindDimenPxOffsetAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveDimenPxOffsetAttr(attr) }
+fun View.bindDimenPxOffsetAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveDimenPxOffsetAttr(attr) }
+fun RecyclerView.ViewHolder.bindDimenPxOffsetAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveDimenPxOffsetAttr(attr) }
+
 // DRAWABLE
 private fun Context.getResDrawable(@DrawableRes id: Int) = AppCompatResources.getDrawable(this, id)!!
 fun Context.bindDrawable(@DrawableRes id: Int) = unsafeLazy { getResDrawable(id) }
@@ -138,6 +249,20 @@ fun Fragment.bindDrawable(@DrawableRes id: Int) = unsafeLazy { activity.getResDr
 fun SupportFragment.bindDrawable(@DrawableRes id: Int) = unsafeLazy { activity!!.getResDrawable(id) }
 fun View.bindDrawable(@DrawableRes id: Int) = unsafeLazy { context.getResDrawable(id) }
 fun RecyclerView.ViewHolder.bindDrawable(@DrawableRes id: Int) = unsafeLazy { itemView.context.getResDrawable(id) }
+
+// DRAWABLE ATTR
+private fun Context.resolveDrawableAttr(@AttrRes attr: Int): Drawable {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getDrawable(0)
+    array.recycle()
+    return value
+}
+fun Context.bindDrawableAttr(@AttrRes attr: Int) = unsafeLazy { resolveDrawableAttr(attr) }
+fun Dialog.bindDrawableAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveDrawableAttr(attr) }
+fun Fragment.bindDrawableAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveDrawableAttr(attr) }
+fun SupportFragment.bindDrawableAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveDrawableAttr(attr) }
+fun View.bindDrawableAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveDrawableAttr(attr) }
+fun RecyclerView.ViewHolder.bindDrawableAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveDrawableAttr(attr) }
 
 // FLOAT
 private fun Context.getResFloat(@DimenRes id: Int): Float {
@@ -152,6 +277,20 @@ fun SupportFragment.bindFloat(@DimenRes id: Int) = unsafeLazy { activity!!.getRe
 fun View.bindFloat(@DimenRes id: Int) = unsafeLazy { context.getResFloat(id) }
 fun RecyclerView.ViewHolder.bindFloat(@DimenRes id: Int) = unsafeLazy { itemView.context.getResFloat(id) }
 
+// FLOAT ATTR
+private fun Context.resolveFloatAttr(@AttrRes attr: Int): Float {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getFloat(0, 0f)
+    array.recycle()
+    return value
+}
+fun Context.bindFloatAttr(@AttrRes attr: Int) = unsafeLazy { resolveFloatAttr(attr) }
+fun Dialog.bindFloatAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveFloatAttr(attr) }
+fun Fragment.bindFloatAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveFloatAttr(attr) }
+fun SupportFragment.bindFloatAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveFloatAttr(attr) }
+fun View.bindFloatAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveFloatAttr(attr) }
+fun RecyclerView.ViewHolder.bindFloatAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveFloatAttr(attr) }
+
 // FONT
 private fun Context.getResFont(@FontRes id: Int) = ResourcesCompat.getFont(this, id)!!
 fun Context.bindFont(@FontRes id: Int) = unsafeLazy { getResFont(id) }
@@ -160,6 +299,27 @@ fun Fragment.bindFont(@FontRes id: Int) = unsafeLazy { activity.getResFont(id) }
 fun SupportFragment.bindFont(@FontRes id: Int) = unsafeLazy { activity!!.getResFont(id) }
 fun View.bindFont(@FontRes id: Int) = unsafeLazy { context.getResFont(id) }
 fun RecyclerView.ViewHolder.bindFont(@FontRes id: Int) = unsafeLazy { itemView.context.getResFont(id) }
+
+// FONT ATTR
+@RequiresApi(Build.VERSION_CODES.O)
+private fun Context.resolveFontAttr(@AttrRes attr: Int): Typeface {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getFont(0)
+    array.recycle()
+    return value
+}
+@RequiresApi(Build.VERSION_CODES.O)
+fun Context.bindFontAttr(@AttrRes attr: Int) = unsafeLazy { resolveFontAttr(attr) }
+@RequiresApi(Build.VERSION_CODES.O)
+fun Dialog.bindFontAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveFontAttr(attr) }
+@RequiresApi(Build.VERSION_CODES.O)
+fun Fragment.bindFontAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveFontAttr(attr) }
+@RequiresApi(Build.VERSION_CODES.O)
+fun SupportFragment.bindFontAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveFontAttr(attr) }
+@RequiresApi(Build.VERSION_CODES.O)
+fun View.bindFontAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveFontAttr(attr) }
+@RequiresApi(Build.VERSION_CODES.O)
+fun RecyclerView.ViewHolder.bindFontAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveFontAttr(attr) }
 
 // INT
 private fun Context.getResInt(@IntegerRes id: Int) = resources.getInteger(id)
@@ -170,6 +330,34 @@ fun SupportFragment.bindInt(@IntegerRes id: Int) = unsafeLazy { activity!!.getRe
 fun View.bindInt(@IntegerRes id: Int) = unsafeLazy { context.getResInt(id) }
 fun RecyclerView.ViewHolder.bindInt(@IntegerRes id: Int) = unsafeLazy { itemView.context.getResInt(id) }
 
+// INT ATTR
+private fun Context.resolveIntAttr(@AttrRes attr: Int): Int {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getInt(0, 0)
+    array.recycle()
+    return value
+}
+fun Context.bindIntAttr(@AttrRes attr: Int) = unsafeLazy { resolveIntAttr(attr) }
+fun Dialog.bindIntAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveIntAttr(attr) }
+fun Fragment.bindIntAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveIntAttr(attr) }
+fun SupportFragment.bindIntAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveIntAttr(attr) }
+fun View.bindIntAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveIntAttr(attr) }
+fun RecyclerView.ViewHolder.bindIntAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveIntAttr(attr) }
+
+// INTEGER ATTR
+private fun Context.resolveIntegerAttr(@AttrRes attr: Int): Int {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getInteger(0, 0)
+    array.recycle()
+    return value
+}
+fun Context.bindIntegerAttr(@AttrRes attr: Int) = unsafeLazy { resolveIntegerAttr(attr) }
+fun Dialog.bindIntegerAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveIntegerAttr(attr) }
+fun Fragment.bindIntegerAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveIntegerAttr(attr) }
+fun SupportFragment.bindIntegerAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveIntegerAttr(attr) }
+fun View.bindIntegerAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveIntegerAttr(attr) }
+fun RecyclerView.ViewHolder.bindIntegerAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveIntegerAttr(attr) }
+
 // STRING
 fun Context.bindString(@StringRes id: Int) = unsafeLazy { getString(id) }
 fun Dialog.bindString(@StringRes id: Int) = unsafeLazy { context.getString(id) }
@@ -177,6 +365,20 @@ fun Fragment.bindString(@StringRes id: Int) = unsafeLazy { activity.getString(id
 fun SupportFragment.bindString(@StringRes id: Int) = unsafeLazy { activity!!.getString(id) }
 fun View.bindString(@StringRes id: Int) = unsafeLazy { context.getString(id) }
 fun RecyclerView.ViewHolder.bindString(@StringRes id: Int) = unsafeLazy { itemView.context.getString(id) }
+
+// STRING ATTR
+private fun Context.resolveStringAttr(@AttrRes attr: Int): String {
+    val array = getTypedArrayWithAttributes(attr)
+    val value = array.getString(0)
+    array.recycle()
+    return value
+}
+fun Context.bindStringAttr(@AttrRes attr: Int) = unsafeLazy { resolveStringAttr(attr) }
+fun Dialog.bindStringAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveStringAttr(attr) }
+fun Fragment.bindStringAttr(@AttrRes attr: Int) = unsafeLazy { activity.resolveStringAttr(attr) }
+fun SupportFragment.bindStringAttr(@AttrRes attr: Int) = unsafeLazy { activity!!.resolveStringAttr(attr) }
+fun View.bindStringAttr(@AttrRes attr: Int) = unsafeLazy { context.resolveStringAttr(attr) }
+fun RecyclerView.ViewHolder.bindStringAttr(@AttrRes attr: Int) = unsafeLazy { itemView.context.resolveStringAttr(attr) }
 
 // VIEW
 fun <V : View>Activity.bindView(@IdRes id: Int) = unsafeLazy { findViewById<V>(id) }
@@ -203,3 +405,5 @@ private fun <T> optionalUnsafeLazy(initializer: () -> T?) = lazy(LazyThreadSafet
 private object VALUE_HOLDER {
     val VALUE: TypedValue = TypedValue()
 }
+
+private fun Context.getTypedArrayWithAttributes(vararg attr: Int) = theme.obtainStyledAttributes(attr)
